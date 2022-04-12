@@ -27,7 +27,7 @@ object ProductsManager : CoroutineScope {
         launch {
             searchEvent.receiveAsFlow()
                 .debounce {
-                    0L
+                    1000L
                 }.collectIndexed { index, value ->
                     productsFlow.value = fake.filter { it.sku.contains(value) }
                 }
@@ -38,5 +38,4 @@ object ProductsManager : CoroutineScope {
 val fake = listOf<Product>(
     Product("1", 1, "1"),
     Product("2", 2, "2")
-
 )

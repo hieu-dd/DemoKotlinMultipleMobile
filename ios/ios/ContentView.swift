@@ -2,7 +2,7 @@ import SwiftUI
 import domain
 
 struct ContentView: View {
-	let greeting = Greeting()
+	let greeting = Geeting()
 
 	@State var greet = "Loading..."
 
