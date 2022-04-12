@@ -93,8 +93,4 @@ tasks.register<Zip>("packageDomainReleaseXCFramework") {
 afterEvaluate {
     tasks.getByName("assemble")
         .dependsOn("assembleXCFramework")
-
-//    tasks.getByName("assembleRelease")
-//        .dependsOn("assembleDomainReleaseXCFramework")
-//        .finalizedBy("packageDomainReleaseXCFramework")
 }
