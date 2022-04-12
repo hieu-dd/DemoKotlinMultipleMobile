@@ -38,12 +38,12 @@ kotlin {
         // Objective-C generics support by default
     }
 
-    val ktor_version = "2.0.0"
 
     sourceSets {
+        val ktorVersion = "2.0.0"
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -53,13 +53,13 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation( "io.ktor:ktor-client-okhttp:$ktor_version")
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
             }
         }
         val androidTest by getting
         val iosMain by getting {
             dependencies {
-                implementation( "io.ktor:ktor-client-ios:$ktor_version")
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
             }
         }
         val iosTest by getting
