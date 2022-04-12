@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.kmm.Greeting
 import android.widget.TextView
+import com.example.kmm.ProductsManager
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectIndexed
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun greet(): String {
@@ -11,6 +16,7 @@ fun greet(): String {
 }
 
 class MainActivity : AppCompatActivity() {
+    private val productsManager = ProductsManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,14 +24,17 @@ class MainActivity : AppCompatActivity() {
         val tv: TextView = findViewById(R.id.text_view)
         tv.text = greet()
         tv.text = "Loading..."
-        runBlocking {
-            kotlin.runCatching {
-                Greeting().getHtml()
-            }.onSuccess {
-                tv.text = it
-            }.onFailure {
-                tv.text = "Error: ${it.localizedMessage}"
+        GlobalScope.launch {
+
+            productsManager.getProductsFlow().collectIndexed { index, value ->
+                runOnUiThread {
+                    tv.text = value.size.toString()
+                }
             }
+        }
+        GlobalScope.launch {
+            delay(2000)
+            productsManager.search("11")
         }
     }
 }

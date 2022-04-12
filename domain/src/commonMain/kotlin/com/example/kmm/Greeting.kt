@@ -14,6 +14,6 @@ class Greeting {
 
     suspend fun getHtml(): String {
         val response = client.get("https://ktor.io/docs")
-        return response.bodyAsText()
+        return "${greeting()} ${response.bodyAsText()}"
     }
 }
