@@ -43,6 +43,11 @@ kotlin {
         val ktorVersion = "2.0.0"
         val commonMain by getting {
             dependencies {
+                implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt"){
+                    version {
+                        strictly("1.6.0-native-mt")
+                    }
+                }
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
