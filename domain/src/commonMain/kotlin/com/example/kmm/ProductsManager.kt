@@ -26,9 +26,7 @@ object ProductsManager : CoroutineScope {
     init {
         launch {
             searchEvent.receiveAsFlow()
-                .debounce {
-                    1000L
-                }.collectIndexed { index, value ->
+                .collectLatest { value ->
                     productsFlow.value = fake.filter { it.sku.contains(value) }
                 }
         }
