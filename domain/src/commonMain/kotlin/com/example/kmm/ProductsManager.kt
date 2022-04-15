@@ -40,6 +40,7 @@ object ProductsManager : CoroutineScope {
     }
 
     init {
+        search("")
         launch {
             searchEvent.receiveAsFlow()
                 .debounce { 0L }

@@ -20,8 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role.Companion.Image
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.kmm.Extension.formatMoney
 import com.example.kmm.ProductsManager
@@ -68,6 +71,9 @@ fun MainScreen(
                         searchText.value = it
                         productsManager.search(it)
                     },
+                    placeholder = {
+                        Text(text = "Enter product to search")
+                    },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.White
                     )
@@ -84,15 +90,19 @@ fun MainScreen(
                                 .background(Color.White)
                         ) {
                             Image(
-                                painter = rememberAsyncImagePainter("https://lh3.googleusercontent.com/vFpAXTtQzObGSHYwdMxAgKzs-gsV_eY3iRVZdP4Ig85SHDGR_SwRHojaBpEWfPaNs99p5un5iqF_ZaAsvA=rw-w300"),
+                                painter = rememberAsyncImagePainter(product.productInfo.imageUrl),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .padding(12.dp)
                                     .fillMaxWidth()
                                     .height(100.dp)
                             )
-                            Text(product.productInfo.name)
-                            Text(formatMoney(1000.0))
+                            Text(product.productInfo.name, maxLines = 2)
+                            Text(
+                                formatMoney(product.prices.firstOrNull()?.sellPrice ?: 0.0),
+                                color = Color.Red,
+                                style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                            )
                         }
                     }
                 }
