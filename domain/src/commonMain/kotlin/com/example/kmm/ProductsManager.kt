@@ -54,7 +54,12 @@ object ProductsManager : CoroutineScope {
 
     fun getProducts(text: String): List<Product> {
         return Json { ignoreUnknownKeys = true }
-            .decodeFromString<GetProductsResponse.ProductResult>(Dummy.productsJson).products.shuffled()
+            .decodeFromString<GetProductsResponse.ProductResult>(Dummy.productsJson).products.filter {
+                val chars = text.toCharArray().map { it.toString() }
+                with(it.productInfo) {
+                    chars.all { sku.contains(it) } || chars.all { name.contains(it) }
+                }
+            }
 
     }
 }
