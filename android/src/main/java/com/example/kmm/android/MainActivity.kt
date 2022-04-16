@@ -11,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -51,32 +52,34 @@ fun MainScreen(
     val products = productsManager.getProductsFlow().collectAsState()
     Surface() {
         Scaffold(
-            topBar = {
-                TopAppBar() {
-                    Text(Greeting().greeting())
-                }
-            },
-            backgroundColor = Color.LightGray
+
         ) {
-            Column(
-                modifier = Modifier.padding(8.dp)
-            ) {
+            Column(modifier = Modifier.padding(8.dp)) {
                 val searchText = remember {
                     mutableStateOf("")
                 }
-                TextField(
-                    modifier = Modifier.fillMaxWidth(),
+                Text(
+                    Greeting().greeting(),
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 32.sp
+                    )
+                )
+                OutlinedTextField(
+                    modifier = Modifier.padding(top = 12.dp).fillMaxWidth(),
                     value = searchText.value,
                     onValueChange = {
                         searchText.value = it
                         productsManager.search(it)
                     },
                     placeholder = {
-                        Text(text = "Enter product to search")
+                        Text(text = "Search products")
                     },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.White
-                    )
+                    ),
+                    shape = RoundedCornerShape(8.dp)
                 )
                 LazyVerticalGrid(
                     cells = GridCells.Fixed(2),
@@ -87,6 +90,7 @@ fun MainScreen(
                         Column(
                             modifier = Modifier
                                 .padding(1.dp)
+                                .padding(bottom = 6.dp)
                                 .background(Color.White)
                         ) {
                             Image(

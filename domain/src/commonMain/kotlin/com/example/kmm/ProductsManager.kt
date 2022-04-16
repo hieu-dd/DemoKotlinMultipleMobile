@@ -11,7 +11,9 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromJsonElement
 import kotlin.coroutines.CoroutineContext
 
 object ProductsManager : CoroutineScope {
@@ -50,16 +52,10 @@ object ProductsManager : CoroutineScope {
         }
     }
 
-    suspend fun getProducts(text: String): List<Product> {
-        return try {
-            val response: GetProductsResponse = client.post("https://discovery.dev.tekoapis.net/api/v1/search") {
-                contentType(ContentType.Application.Json)
-                setBody(mapOf(Pair("location", "00"), Pair("terminalCode", "CP01"), Pair("query", text)))
-            }.body()
-            response.result?.products.orEmpty()
-        } catch (e: Throwable) {
-            emptyList()
-        }
+    fun getProducts(text: String): List<Product> {
+        return Json { ignoreUnknownKeys = true }
+            .decodeFromString<GetProductsResponse.ProductResult>(Dummy.productsJson).products.shuffled()
+
     }
 }
 
