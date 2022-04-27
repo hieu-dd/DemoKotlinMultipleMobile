@@ -10,7 +10,7 @@ import domain
 
 struct ContentView: View {
     let greeting = Greeting()
-    
+
     
     @ObservedObject private var productsObserver = ProductsService()
     @State var search = ""
