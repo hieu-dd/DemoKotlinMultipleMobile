@@ -1,4 +1,8 @@
-package com.example.kmm
+package com.example.kmm.data
+
+import com.example.kmm.GetProductsResponse
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 object Dummy {
     val productsJson = """
@@ -2294,4 +2298,13 @@ object Dummy {
     }
   ]
 }"""
+
+    fun getProducts() = Json { ignoreUnknownKeys = true }.decodeFromString<GetProductsResponse.ProductResult>(
+        string =
+        productsJson
+    ).products
+
+    val users = mapOf(
+        "doduchieu@gmail.com" to "12345678",
+    )
 }

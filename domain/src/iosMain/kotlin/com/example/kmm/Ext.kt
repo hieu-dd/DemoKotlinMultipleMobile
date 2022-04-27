@@ -1,5 +1,9 @@
-package com.example.kmm
+package com.example.kmm.utils
 
+import com.example.kmm.CartManager
+import com.example.kmm.ProductsManager
+import com.example.kmm.model.Cart
+import com.example.kmm.model.Product
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import platform.Foundation.NSNumber
@@ -8,6 +12,12 @@ import platform.Foundation.NSNumberFormatter
 fun ProductsManager.observerProducts(
     onSuccess: (List<Product>) -> Unit
 ) = getProductsFlow().onEach {
+    onSuccess(it)
+}.launchIn(this)
+
+fun CartManager.observerCart(
+    onSuccess: (Cart) -> Unit
+) = getCartFlow().onEach {
     onSuccess(it)
 }.launchIn(this)
 

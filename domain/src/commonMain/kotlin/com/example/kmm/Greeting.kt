@@ -17,3 +17,7 @@ class Greeting {
         return "${greeting()} ${response.bodyAsText()}"
     }
 }
+
+expect class Platform() {
+    val platform: String
+}

@@ -1,5 +1,6 @@
 package com.example.kmm
 
+import com.example.kmm.model.Product
 import kotlinx.serialization.Serializable
 
 @Serializable
