@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
                 composable("cart") {
-
+                    CartScreen(cartManager = CartManager, navController = navController)
                 }
             }
         }

@@ -6,7 +6,8 @@ data class Cart(
     var items: MutableList<CartItem> = mutableListOf()
 ) {
     fun getPrice(): Double = items.sumOf { item ->
-        Dummy.getProducts().find { it.productInfo.sku == item.sku }?.prices?.firstOrNull()?.sellPrice ?: 0.0
+        (Dummy.getProducts().find { it.productInfo.sku == item.sku }?.prices?.firstOrNull()?.sellPrice
+            ?: 0.0) * item.quantity
     }
 
     fun getTotalItems(): Int = items.sumOf { it.quantity }

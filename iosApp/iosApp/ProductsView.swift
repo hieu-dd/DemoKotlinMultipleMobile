@@ -8,9 +8,9 @@
 import SwiftUI
 import domain
 
-struct ContentView: View {
+struct ProductsView: View {
     let greeting = Greeting()
-
+    
     
     @ObservedObject private var productsObserver = ProductsService()
     @State var search = ""
@@ -22,12 +22,17 @@ struct ContentView: View {
         ]
         NavigationView {
             VStack{
-                TextField("Search products",text: $search).onChange(of: search, perform: {text in
-                    productsObserver.search(text: text)
-                })
-                .frame(maxWidth:.infinity)
-                .padding(.horizontal)
-                .textFieldStyle(.roundedBorder)
+                HStack{
+                    TextField("Search products",text: $search).onChange(of: search, perform: {text in
+                        productsObserver.search(text: text)
+                    })
+                    .frame(maxWidth:.infinity)
+                    .padding(.horizontal)
+                    .textFieldStyle(.roundedBorder)
+                    NavigationLink(destination: CartView()) {
+                        Image(systemName: "cart").padding(.trailing,20)
+                    }
+                }
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
@@ -48,11 +53,19 @@ struct ContentView: View {
                                 .frame(width: 200, height: 200)
                                 Text(item.productInfo.name)
                                     .lineLimit(2)
-                                Text(
-                                    domain.Extension().formatMoney(value: item.prices[0].sellPrice)
-                                )
-                                .foregroundColor(.red)
-                                .font(.headline)
+                                HStack(){
+                                    Text(
+                                        domain.Extension().formatMoney(value: item.prices[0].sellPrice)
+                                    )
+                                    .foregroundColor(.red)
+                                    .font(.headline)
+                                    Button {
+                                        CartManager().addItem(product: item)
+                                    } label: {
+                                        Image(systemName: "cart.badge.plus")
+                                    }
+                                }
+                                
                             }
                             .frame(alignment:.topLeading)
                             .frame(height:300)
@@ -63,7 +76,8 @@ struct ContentView: View {
                 .frame(maxHeight: .infinity)
             }
             .frame(maxHeight:.infinity,alignment: .topLeading)
-            .navigationTitle(Greeting().greeting())
+            .navigationBarHidden(true)
+            //            .navigationTitle(Greeting().greeting())
         }
         
         
@@ -72,6 +86,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ProductsView()
     }
 }

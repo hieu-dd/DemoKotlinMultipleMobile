@@ -11,8 +11,11 @@
 		DCABCABF2818F5AA006E2B87 /* domain.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCABCABE2818F5AA006E2B87 /* domain.xcframework */; };
 		DCABCAC02818F5AA006E2B87 /* domain.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCABCABE2818F5AA006E2B87 /* domain.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCABCAC22818F6FF006E2B87 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCABCAC12818F6FF006E2B87 /* LoginView.swift */; };
+		DCADEFD22819A7AE0029695E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADEFD12819A7AE0029695E /* CartView.swift */; };
+		DCADEFD52819A8440029695E /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADEFD42819A8440029695E /* CartService.swift */; };
+		DCC62F2828194FDD001A5BFB /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC62F2728194FDD001A5BFB /* ViewExt.swift */; };
 		DCF1668D280AA43B001B86A1 /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF1668C280AA43B001B86A1 /* iosAppApp.swift */; };
-		DCF1668F280AA43B001B86A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF1668E280AA43B001B86A1 /* ContentView.swift */; };
+		DCF1668F280AA43B001B86A1 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF1668E280AA43B001B86A1 /* ProductsView.swift */; };
 		DCF16691280AA43E001B86A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCF16690280AA43E001B86A1 /* Assets.xcassets */; };
 		DCF16694280AA43E001B86A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCF16693280AA43E001B86A1 /* Preview Assets.xcassets */; };
 		FCFFD1CB322B51C97E7750AF /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13354139014CFC5026A1BF70 /* Pods_iosApp.framework */; };
@@ -39,9 +42,12 @@
 		DC626D4C280AA79B00E87AF2 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		DCABCABE2818F5AA006E2B87 /* domain.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = domain.xcframework; path = ../domain/build/XCFrameworks/debug/domain.xcframework; sourceTree = "<group>"; };
 		DCABCAC12818F6FF006E2B87 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DCADEFD12819A7AE0029695E /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		DCADEFD42819A8440029695E /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
+		DCC62F2728194FDD001A5BFB /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		DCF16689280AA43B001B86A1 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF1668C280AA43B001B86A1 /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
-		DCF1668E280AA43B001B86A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DCF1668E280AA43B001B86A1 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		DCF16690280AA43E001B86A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCF16693280AA43E001B86A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +74,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DCADEFD32819A82D0029695E /* service */ = {
+			isa = PBXGroup;
+			children = (
+				DC626D4C280AA79B00E87AF2 /* ProductsService.swift */,
+				DCADEFD42819A8440029695E /* CartService.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
 		DCF16680280AA43B001B86A1 = {
 			isa = PBXGroup;
 			children = (
@@ -89,12 +104,14 @@
 		DCF1668B280AA43B001B86A1 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				DCADEFD32819A82D0029695E /* service */,
 				DCF1668C280AA43B001B86A1 /* iosAppApp.swift */,
-				DCF1668E280AA43B001B86A1 /* ContentView.swift */,
+				DCF1668E280AA43B001B86A1 /* ProductsView.swift */,
 				DCF16690280AA43E001B86A1 /* Assets.xcassets */,
 				DCF16692280AA43E001B86A1 /* Preview Content */,
-				DC626D4C280AA79B00E87AF2 /* ProductsService.swift */,
 				DCABCAC12818F6FF006E2B87 /* LoginView.swift */,
+				DCC62F2728194FDD001A5BFB /* ViewExt.swift */,
+				DCADEFD12819A7AE0029695E /* CartView.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -187,8 +204,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCF1668F280AA43B001B86A1 /* ContentView.swift in Sources */,
+				DCADEFD52819A8440029695E /* CartService.swift in Sources */,
+				DCADEFD22819A7AE0029695E /* CartView.swift in Sources */,
+				DCF1668F280AA43B001B86A1 /* ProductsView.swift in Sources */,
 				DCF1668D280AA43B001B86A1 /* iosAppApp.swift in Sources */,
+				DCC62F2828194FDD001A5BFB /* ViewExt.swift in Sources */,
 				DCABCAC22818F6FF006E2B87 /* LoginView.swift in Sources */,
 				DC626D4D280AA79B00E87AF2 /* ProductsService.swift in Sources */,
 			);

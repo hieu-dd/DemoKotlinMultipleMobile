@@ -9,6 +9,8 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddShoppingCart
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.rounded.AddShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -43,32 +45,30 @@ fun ProductScreen(
                 val searchText = remember {
                     mutableStateOf("")
                 }
-                Text(
-                    Greeting().greeting(),
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 32.sp
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .padding(top = 12.dp)
+                            .weight(1F),
+                        value = searchText.value,
+                        onValueChange = {
+                            searchText.value = it
+                            productsManager.search(it)
+                        },
+                        placeholder = {
+                            Text(text = "Search products")
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(8.dp)
                     )
-                )
-                Text(text = cart.value.getTotalItems().toString())
-                OutlinedTextField(
-                    modifier = Modifier
-                        .padding(top = 12.dp)
-                        .fillMaxWidth(),
-                    value = searchText.value,
-                    onValueChange = {
-                        searchText.value = it
-                        productsManager.search(it)
-                    },
-                    placeholder = {
-                        Text(text = "Search products")
-                    },
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White
-                    ),
-                    shape = RoundedCornerShape(8.dp)
-                )
+                    IconButton(onClick = { navController.navigate("cart") }) {
+                        Icon(Icons.Default.ShoppingCart, contentDescription = null)
+                    }
+                }
                 LazyVerticalGrid(
                     cells = GridCells.Fixed(2),
                     modifier = Modifier.padding(top = 6.dp),
@@ -104,7 +104,7 @@ fun ProductScreen(
                                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                                 )
                                 IconButton(onClick = { cartManager.addItem(product) }) {
-                                    Icon(Icons.Rounded.AddShoppingCart, contentDescription = null)
+                                    Icon(Icons.Default.AddShoppingCart, contentDescription = null)
                                 }
                             }
                         }
