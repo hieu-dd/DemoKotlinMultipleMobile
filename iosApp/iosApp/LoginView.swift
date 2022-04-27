@@ -7,10 +7,10 @@
 
 import Foundation
 import SwiftUI
-
+import domain
 
 struct LoginView : View {
-    
+    private var authManager = AuthManager(context : NSObject.init())
     @State private var willMoveToNextScreen = false
     @State private var userName = ""
     @State private var password = ""
@@ -22,7 +22,8 @@ struct LoginView : View {
             TextField("Search products",text: $userName)
             TextField("Search products",text: $password)
             Button("Sign In", action: {
-                if(!userName.isEmpty && !password.isEmpty){
+                    if(authManager
+                        .login(userName: userName, password: password)){
                     willMoveToNextScreen = true
                 }
             })
