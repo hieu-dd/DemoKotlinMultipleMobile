@@ -9,9 +9,9 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddShoppingCart
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.rounded.AddShoppingCart
+import androidx.compose.material.icons.outlined.AddShoppingCart
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.kmm.CartManager
-import com.example.kmm.Greeting
 import com.example.kmm.ProductsManager
 import com.example.kmm.utils.Extension.formatMoney
 
@@ -46,16 +45,19 @@ fun ProductScreen(
                     mutableStateOf("")
                 }
                 Row(
+                    modifier = Modifier.padding(top = 12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     OutlinedTextField(
                         modifier = Modifier
-                            .padding(top = 12.dp)
                             .weight(1F),
                         value = searchText.value,
                         onValueChange = {
                             searchText.value = it
                             productsManager.search(it)
+                        },
+                        leadingIcon = {
+                            Icon(Icons.Outlined.Search, contentDescription = null)
                         },
                         placeholder = {
                             Text(text = "Search products")
@@ -66,7 +68,7 @@ fun ProductScreen(
                         shape = RoundedCornerShape(8.dp)
                     )
                     IconButton(onClick = { navController.navigate("cart") }) {
-                        Icon(Icons.Default.ShoppingCart, contentDescription = null)
+                        Icon(Icons.Outlined.ShoppingCart, contentDescription = null)
                     }
                 }
                 LazyVerticalGrid(
@@ -95,6 +97,7 @@ fun ProductScreen(
 
                             }
                             Row(
+                                modifier = Modifier.fillMaxWidth(),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
@@ -104,8 +107,9 @@ fun ProductScreen(
                                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                                 )
                                 IconButton(onClick = { cartManager.addItem(product) }) {
-                                    Icon(Icons.Default.AddShoppingCart, contentDescription = null)
+                                    Icon(Icons.Outlined.AddShoppingCart, contentDescription = null)
                                 }
+                                Spacer(modifier = Modifier.width(4.dp))
                             }
                         }
                     }

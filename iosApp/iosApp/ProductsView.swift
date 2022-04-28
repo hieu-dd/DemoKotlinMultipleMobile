@@ -77,10 +77,7 @@ struct ProductsView: View {
             }
             .frame(maxHeight:.infinity,alignment: .topLeading)
             .navigationBarHidden(true)
-            //            .navigationTitle(Greeting().greeting())
         }
-        
-        
     }
 }
 

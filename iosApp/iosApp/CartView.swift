@@ -14,8 +14,35 @@ struct CartView :View{
     
     var body: some View {
         let cart = cartService.cart
-        VStack {
-            Text(domain.Extension().formatMoney(value: cart.getPrice()))
+        let items = cartService.items
+        let columns = [
+            GridItem(.flexible()),
+        ]
+        NavigationView {
+            VStack {
+                Text("Gio hang cua toi")
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(items,id : \.sku){ item in
+                            Text(item.sku)
+                            
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .frame(maxHeight: .infinity)
+                Text(domain.Extension().formatMoney(value: cart.getPrice()))
+            }.frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .leading)
+                .navigationBarTitle(Text("WeSplit"))     // << here !!
         }
+        
+        
     }
 }
+
+struct CartView_Previews: PreviewProvider {
+    static var previews: some View {
+        CartView()
+    }
+}
+

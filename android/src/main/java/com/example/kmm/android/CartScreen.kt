@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowLeft
+import androidx.compose.material.icons.outlined.ChevronLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,9 +35,10 @@ fun CartScreen(
         Scaffold(
             topBar = {
                 TopAppBar(
+                    backgroundColor = Color.White,
                     navigationIcon = {
                         IconButton(onClick = { navController.navigateUp() }) {
-                            Icon(Icons.Default.ArrowLeft, contentDescription = null)
+                            Icon(Icons.Outlined.ChevronLeft, contentDescription = null)
                         }
                     },
                     title = {
@@ -45,8 +47,19 @@ fun CartScreen(
                 )
             },
             bottomBar = {
-                BottomAppBar() {
-                    Text(text = formatMoney(cart.getPrice()), style = TextStyle(fontSize = 20.sp))
+                BottomAppBar(
+                    backgroundColor = Color.White
+                ) {
+                    Spacer(modifier = Modifier.weight(1F))
+                    Text("Tổng thanh toán: ")
+                    Text(
+                        text = formatMoney(cart.getPrice()),
+                        style = TextStyle(fontSize = 20.sp, color = Color.Red)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = {}, modifier = Modifier.fillMaxHeight()) {
+                        Text("  Mua hàng  ")
+                    }
                 }
             }
         ) {
@@ -72,9 +85,11 @@ fun CartLineItem(
                 .size(80.dp)
                 .padding(4.dp)
         )
-        Column(modifier = Modifier
-            .fillMaxHeight()
-            .padding(start = 8.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(start = 8.dp)
+        ) {
             Text(product.productInfo.name)
             Spacer(modifier = Modifier.weight(1F))
             Row(
