@@ -15,5 +15,8 @@ data class Cart(
 
 data class CartItem(
     val sku: String,
-    var quantity: Int
+    val name: String,
+    val image: String,
+    var quantity: Int,
+    var price: Double
 )

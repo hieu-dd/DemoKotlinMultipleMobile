@@ -76,10 +76,9 @@ fun CartScreen(
 fun CartLineItem(
     cartItem: CartItem,
 ) {
-    val product = Dummy.getProducts().find { it.productInfo.sku == cartItem.sku }!!
     Row(modifier = Modifier.padding(top = 12.dp, start = 12.dp, end = 12.dp)) {
         Image(
-            painter = rememberAsyncImagePainter(product.productInfo.imageUrl),
+            painter = rememberAsyncImagePainter(cartItem.image),
             contentDescription = null,
             modifier = Modifier
                 .size(80.dp)
@@ -90,7 +89,7 @@ fun CartLineItem(
                 .fillMaxHeight()
                 .padding(start = 8.dp)
         ) {
-            Text(product.productInfo.name)
+            Text(cartItem.name)
             Spacer(modifier = Modifier.weight(1F))
             Row(
                 modifier = Modifier
@@ -100,7 +99,7 @@ fun CartLineItem(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    formatMoney(product.prices.firstOrNull()?.sellPrice ?: 0.0),
+                    formatMoney(cartItem.price),
                     color = Color.Red,
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 )

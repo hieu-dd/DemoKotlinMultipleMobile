@@ -25,7 +25,15 @@ object CartManager : CoroutineScope {
             val items = value.items.copy()
             items.find { it.sku == product.productInfo.sku }?.apply {
                 quantity++
-            } ?: items.add(CartItem(product.productInfo.sku, 1))
+            } ?: items.add(
+                CartItem(
+                    product.productInfo.sku,
+                    product.productInfo.name,
+                    product.productInfo.imageUrl,
+                    1,
+                    product.prices.firstOrNull()?.sellPrice ?: 0.0
+                )
+            )
             value = Cart(items)
         }
     }

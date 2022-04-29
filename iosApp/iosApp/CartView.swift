@@ -15,28 +15,56 @@ struct CartView :View{
     var body: some View {
         let cart = cartService.cart
         let items = cartService.items
-        let columns = [
-            GridItem(.flexible()),
-        ]
-        NavigationView {
-            VStack {
-                Text("Gio hang cua toi")
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(items,id : \.sku){ item in
-                            Text(item.sku)
-                            
+        VStack {
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    ForEach(items,id : \.sku){ item in
+                        HStack(alignment:.top){
+                            AsyncImage(
+                                url: URL.init(string: item.image) ,
+                                content: { image in
+                                    image.resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(maxWidth: 100, maxHeight: 100)
+                                },
+                                placeholder: {
+                                    ProgressView()
+                                }
+                            )
+                            .padding(.horizontal)
+                            .frame(width: 100, height: 100)
+                            VStack{
+                                Text(item.name)
+                                Spacer()
+                                HStack{
+                                    Text(
+                                        domain.Extension().formatMoney(value: item.price)
+                                    )
+                                    .foregroundColor(.red)
+                                    .font(.headline)
+                                    
+                                    Spacer()
+                                    Text("x\(item.quantity)")
+                                }
+                                
+                            }
+                            Spacer()
                         }
+                        
                     }
-                    .padding(.horizontal)
                 }
-                .frame(maxHeight: .infinity)
+                .padding(.horizontal)
+            }
+            .frame(maxHeight: .infinity)
+            HStack(){
+                Spacer()
+                Text("Tổng thanh toán: ")
                 Text(domain.Extension().formatMoney(value: cart.getPrice()))
-            }.frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .leading)
-                .navigationBarTitle(Text("WeSplit"))     // << here !!
-        }
-        
-        
+                    .font(.system(size: 24,weight: Font.Weight.bold))
+                    .foregroundColor(.red)
+                
+            }
+        }.frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .leading)
     }
 }
 
