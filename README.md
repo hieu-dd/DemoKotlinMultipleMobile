@@ -9,3 +9,6 @@ Common logic for both Android and Ios
 UI by Jetpack compose
 ## IOS
 UI by SwiftUI
+## Env
+* account : doduchieu@gmail.com
+* password : 12345678
