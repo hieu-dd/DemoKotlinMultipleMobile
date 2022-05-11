@@ -33,7 +33,7 @@ struct CartView :View{
                             )
                             .padding(.horizontal)
                             .frame(width: 100, height: 100)
-                            VStack{
+                            VStack(alignment:HorizontalAlignment.leading){
                                 Text(item.name)
                                 Spacer()
                                 HStack{
@@ -50,6 +50,13 @@ struct CartView :View{
                             }
                             Spacer()
                         }
+                        .padding(.vertical)
+                        .overlay(
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.gray),
+                            alignment: .bottom
+                        )
                         
                     }
                 }
